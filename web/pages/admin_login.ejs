@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aria's CDN</title>
+
+    <!-- Web app settings -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Aria's CDN" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ariarees/site/refs/heads/main/img/icon.gif" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Aria Rees">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cdn.ariare.es/">
+    <meta property="og:title" content="Aria's CDN">
+    <meta property="og:description" content="My collection of media and files!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ariarees/site/refs/heads/main/img/icon.gif">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://cdn.ariare.es/">
+    <meta property="twitter:title" content="Aria's CDN">
+    <meta property="twitter:description" content="My collection of media and files!">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/ariarees/site/refs/heads/main/img/icon.gif">
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#ff6fff" />
+
+    <!-- Favicon and CSS -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ariarees/site/refs/heads/main/img/icon.gif">
+    <link rel="stylesheet" href="/app.css">
+    <% if (turnstile_site_key) { %>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <% } %>
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <a href="/" class="back-link">← Back to Files</a>
+        
+        <div class="login-form">
+            <div class="title-container login-title">
+                <img src="https://raw.githubusercontent.com/ariarees/site/refs/heads/main/img/icon.gif" alt="Animated logo" class="title-logo">
+                <h1>Aria's CDN Admin Login</h1>
+            </div>
+            
+            <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+            <% } %>
+            
+            <form method="POST" action="/yuri/admin" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                
+                <% if (turnstile_site_key) { %>
+                <div class="turnstile-container">
+                    <div class="cf-turnstile" data-sitekey="<%= turnstile_site_key %>" data-callback="onTurnstileCallback"></div>
+                </div>
+                <% } %>
+                
+                <button type="submit" class="login-button" id="submitButton" <%= turnstile_site_key ? 'disabled' : '' %>>
+                    Login to Admin Panel
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
