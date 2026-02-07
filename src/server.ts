@@ -19,7 +19,6 @@ const config = {
   SESSION_SECRET: process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex'),
   TURNSTILE_SECRET: process.env.TURNSTILE_SECRET_KEY || '',
   TURNSTILE_SITE_KEY: process.env.TURNSTILE_SITE_KEY || '',
-  MAX_FILE_SIZE: 100 * 1024 * 1024, // 100MB
   BASE_DIR: process.cwd(),
   get CDN_DIR() { return path.join(this.BASE_DIR, 'cdn'); },
   get WEB_DIR() { return path.join(this.BASE_DIR, 'web'); },
@@ -106,10 +105,7 @@ app.use('/api/', limiter);
 // Multer configuration
 const storage = multer.memoryStorage();
 const upload = multer({
-  storage,
-  limits: {
-    fileSize: config.MAX_FILE_SIZE
-  }
+  storage
 });
 
 // --------------------
