@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: cdn
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     volumes:
       - "./cdn/cdn:/app/cdn"
       - "./.env:/app/.env:ro"
